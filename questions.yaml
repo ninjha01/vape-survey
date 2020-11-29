@@ -3,10 +3,8 @@ description: "Select your school:"
 type: select
 required: true
 choices:
- - "School 1"
- - "School 2"
- - "School 3"
- - "School 4"
+ - "Example School"
+
 ---
 label: "Name"
 description: "Please type your FIRST and LAST name:"
@@ -14,7 +12,7 @@ type: text
 required: true
 ---
 label: "Email"
-description: "If you wish to be entered into a drawing for an Amazon eGift card submit your email address. Your data will be anonymized and will not be linked to your survey results."
+description: "If you wish to be entered into a random drawing for an Amazon eGift card, please submit your email address (Otherwise, you may leave this blank). If you provide your email, your responses will still remain anonymous and will not be linked to your email."
 type: email
 required: false
 ---
@@ -41,21 +39,20 @@ required: true
 choices:
  - "Female"
  - "Male"
- - "Other"
- - "Prefer not to say"
+ - "Prefer to self-describe"
 ---
 label: "Closest 1"
-description: "Write the FIRST and LAST name of your three closest friends: "
+description: "The following three questions ask to list your three closest friends only within your high school in order of decreasing friendship strength (i.e. from closest to least close). In this field, please type the FIRST and LAST name of your closest/best friend in your high school: "
 type: text
 required: true
 ---
 label: "Closest 2"
-description: "Write the FIRST and LAST name of your three closest friends: "
+description: "Please type the FIRST and LAST name of your SECOND closest friend in your high school: "
 type: text
 required: true
 ---
 label: "Closest 3"
-description: "Write the FIRST and LAST name of your three closest friends: "
+description: "Pleasae type the FIRST and LAST name of your THIRD closest friend in your high school: "
 type: text
 required: true
 ---
