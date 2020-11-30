@@ -7,6 +7,10 @@
     </h2>
     {{ form.hidden_tag() }}
     
+    <p>
+    By completing this survey, you are consenting to be in this research study. Your participation is voluntary, and you can stop at any time.
+    </p>
+	
     {% for q_model in form.questions %}
       <h3>Question: {{loop.index}} | {{ q_model.label }}</h3>
       <p>{{q_model.description}}</p>
