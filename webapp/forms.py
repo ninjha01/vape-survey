@@ -1,4 +1,5 @@
 import re
+import random
 from flask_wtf import Form
 from wtforms import TextField, IntegerField, SelectField
 from wtforms.fields.html5 import EmailField
@@ -19,10 +20,12 @@ def question_to_field(q: Question):
     if q.regexp:
         validators.append(Regexp(re.compile(q.regexp), message=q.regexp_message))
     if isinstance(q, SelectQuestion):
+        choices = [(x, x) for x in q.choices]
+        random.shuffle(choices)
         return SelectField(
             description=q.description,
             label=q.label,
-            choices=[("", "")] + [(x, x) for x in q.choices],
+            choices=[("", "")] + choices,
             validators=validators,
             render_kw={"class": "form-control"},
         )

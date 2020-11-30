@@ -95,7 +95,7 @@ def get_sheet_data(tab_name: str) -> Dict[str, List[Dict[str, str]]]:
     global cache
     sheets_service = init_sheets_service()
     if tab_name in cache:
-        print(f"Cache hit for {tab_name}")
+        print(f"Sheets cache hit for {tab_name}")
         return cache[tab_name]
     else:
         result = (

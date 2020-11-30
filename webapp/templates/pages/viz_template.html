@@ -1,6 +1,12 @@
 {% extends 'layouts/main.html' %}
 {% block title %}Vizualization{% endblock %}
 {% block content %}
+  <!-- D3.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
   <div class="page-header">
     <h1>Viz Page</h1>
@@ -8,8 +14,21 @@
 
   <h3> {{ time_to_render }}</h3>
 
-  {% for s, g in graphs %}
-    <h3> School: {{ s }} </h3>
-    {{ g | safe }}
+  {% for id in ids %}
+    <h3>School: {{id}}</h3>
+    <div id="graph-{{id}}"></div>
   {% endfor %}
+
+  <script type="text/javascript">
+
+   var graphs = {{ graphJSON | safe}};
+   var ids = {{ ids | safe }};
+
+   for(var i in graphs) {
+     Plotly.plot(`graph-${ids[i]}`, // the ID of the div, created above
+                 graphs[i].data,
+                 graphs[i].layout || {});
+   }
+
+  </script>
 {% endblock %}
