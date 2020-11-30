@@ -43,7 +43,7 @@ def question_to_field(q: Question):
             validators=validators
             + [
                 NumberRange(
-                    min=13, max=21, message="Enter a valid number between 13 and 21."
+                    min=18, max=21, message="Enter a valid number between 18 and 21."
                 )
             ],
             render_kw={"class": "form-control"},
