@@ -43,18 +43,25 @@ class DB:
         else:
             return result
 
+    def get_graph_and_gen_time_for_school(self, school_name) -> Tuple[any, float]:
+        return (
+            self.get(document=school_name, key="graph"),
+            self.get(document=school_name, key="gen_time"),
+        )
 
-db = DB()
+    def set_graph_for_school(self, school_name, graph):
+        self.set(document=school_name, key="graph", value=graph)
+        now = time.time()
+        self.set(document=school_name, key="gen_time", value=now)
 
 
-def get_graph_and_gen_time_for_school(school_name) -> Tuple[any, float]:
-    return (
-        db.get(document=school_name, key="graph"),
-        db.get(document=school_name, key="gen_time"),
-    )
+db = None
 
 
-def set_graph_for_school(school_name, graph):
-    db.set(document=school_name, key="graph", value=graph)
-    now = time.time()
-    db.set(document=school_name, key="gen_time", value=now)
+def get_db():
+    global db
+    if db:
+        return db
+    else:
+        db = DB()
+        return db

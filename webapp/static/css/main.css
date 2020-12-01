@@ -33,4 +33,7 @@ a {
  * Various other styles
  ****************************************************************************/
 
+.alert {
+    color: red;
+}
 /* Various other styles end */

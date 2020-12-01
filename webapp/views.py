@@ -9,7 +9,7 @@ from flask import render_template, Blueprint, request, redirect, flash, current_
 
 from .forms import SurveyForm
 from .sheets import write_to_sheet, get_sheet_data, submit_to_survey, get_schools
-from .db import get_graph_and_gen_time_for_school, set_graph_for_school
+from .db import get_db
 from .viz import gen_network
 from .utils import encrypt_string
 
@@ -92,7 +92,8 @@ def get_graphs(schools):
 
 
 def create_graph_if_not_cached(school_name):
-    graph, gen_time = get_graph_and_gen_time_for_school(school_name)
+    db = get_db()
+    graph, gen_time = db.get_graph_and_gen_time_for_school(school_name)
     print(graph is None, gen_time is None)
     if (
         gen_time is None or graph is None or (time.time() - gen_time > 60 * 60)
@@ -100,7 +101,7 @@ def create_graph_if_not_cached(school_name):
         print("Regenerating")
         data = get_sheet_data(school_name)
         graph = gen_network(data)
-        set_graph_for_school(school_name, graph)
+        db.set_graph_for_school(school_name, graph)
         return graph
     else:
         print("Cached")
