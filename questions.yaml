@@ -4,7 +4,6 @@ type: select
 required: true
 choices:
  - "Example School"
-
 ---
 label: "Name"
 description: "The website will automatically assign an identifier to each name, keeping answers anonymous even to the researchers. Please type your FIRST and LAST name:"
@@ -23,7 +22,6 @@ required: true
 ---
 label: "Grade"
 description: "Please select your grade level:"
-type: text
 type: select
 required: true
 choices:
