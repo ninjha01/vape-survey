@@ -14,14 +14,17 @@ def gen_network(data):
         color = "cornflowerblue"
         if d.get("Vape", "False") == "True":
             color = "crimson"
-        if d.get("Gender", "Male") == "True":
-            shape = "square"
-        elif d.get("Gender", "Female") == "True":
-            shape = "diamond"
+        gender = d.get("Gender", None)
+        if gender == "Male":
+            symbol = "square"
+        elif gender == "Female":
+            symbol = "diamond"
+        else:
+            symbol = "circle"
         G.add_node(
             d["Name"],
             size=5,
-            shape=shape,
+            symbol=symbol,
             color=color,
             label=f"""
             <br>Id: {d["Name"][:10]}</br>
@@ -49,6 +52,7 @@ def gen_network(data):
                     <br>Id: {f[:10]}</br>
                     <extra></extra>
                     """,
+                    symbol="circle",
                 )
                 ids.add(f)
     # Add Edges
@@ -99,13 +103,14 @@ def gen_network(data):
         hoverinfo="none",
         hovertemplate=[],
         marker=dict(color=[], size=[], line=None),
+        marker_symbol=[],
     )
     for node in G.nodes():
         x, y = pos_[node]
         node_trace["x"] += tuple([x])
         node_trace["y"] += tuple([y])
         node_trace["marker"]["color"] += tuple([G.nodes()[node]["color"]])
-        node_trace["marker"]["shape"] += tuple([G.nodes()[node]["shape"]])
+        node_trace["marker"]["symbol"] += tuple([G.nodes()[node]["symbol"]])
         node_trace["marker"]["size"] += tuple([5 * G.nodes()[node]["size"]])
         # node_trace["text"] += tuple(["<b>" + node + "</b>"])
         node_trace["text"] += tuple([""])
