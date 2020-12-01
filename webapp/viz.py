@@ -14,9 +14,14 @@ def gen_network(data):
         color = "cornflowerblue"
         if d.get("Vape", "False") == "True":
             color = "crimson"
+        if d.get("Gender", "Male") == "True":
+            shape = "square"
+        elif d.get("Gender", "Female") == "True":
+            shape = "diamond"
         G.add_node(
             d["Name"],
             size=5,
+            shape=shape,
             color=color,
             label=f"""
             <br>Id: {d["Name"][:10]}</br>
@@ -100,6 +105,7 @@ def gen_network(data):
         node_trace["x"] += tuple([x])
         node_trace["y"] += tuple([y])
         node_trace["marker"]["color"] += tuple([G.nodes()[node]["color"]])
+        node_trace["marker"]["shape"] += tuple([G.nodes()[node]["shape"]])
         node_trace["marker"]["size"] += tuple([5 * G.nodes()[node]["size"]])
         # node_trace["text"] += tuple(["<b>" + node + "</b>"])
         node_trace["text"] += tuple([""])
