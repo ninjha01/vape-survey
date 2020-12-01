@@ -21,7 +21,6 @@ def gen_network(data):
             label=f"""
             <br>Id: {d["Name"][:10]}</br>
             <br>Influence: {d["Influence"]}</br>
-            <br>Age: {d["Age"]}</br>
             <br>Grade: {d["Grade"]}</br>
             <br>Gender: {d["Gender"]}</br>
             <extra></extra>
