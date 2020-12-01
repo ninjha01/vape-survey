@@ -7,12 +7,12 @@ choices:
 
 ---
 label: "Name"
-description: "Please type your FIRST and LAST name:"
+description: "The website will automatically assign an identifier to each name, keeping answers anonymous even to the researchers. Please type your FIRST and LAST name:"
 type: text
 required: true
 ---
 label: "Email"
-description: "If you wish to be entered into a random drawing for an Amazon eGift card, please submit your email address (Otherwise, you may leave this blank). If you provide your email, your responses will still remain anonymous and will not be linked to your email."
+description: "A $10.00 Amazon eGift Card will be sent for every 20 students who choose to provide their emails. Your responses will still remain anonymous and will not be linked to your email. This is optional and solely for the purpose of sending gift cards– you may leave this blank."
 type: email
 required: false
 ---
@@ -27,9 +27,6 @@ type: text
 type: select
 required: true
 choices:
- - "9th grade"
- - "10th grade"
- - "11th grade"
  - "12th grade"
 ---
 label: "Gender"
@@ -42,17 +39,17 @@ choices:
  - "Prefer to self-describe"
 ---
 label: "Closest 1"
-description: "The following three questions ask to list your three closest friends only within your high school in order of decreasing friendship strength (i.e. from closest to least close). In this field, please type the FIRST and LAST name of your closest/best friend in your high school: "
+description: "The following three questions ask you to list your three closest friends in order of decreasing friendship strength (i.e., from closest to least close). It is important to answer questions 7-9 in the correct order. Please only list your closest friends who are also seniors in the same high school. Your friends will remain anonymous, assigned identifiers, and will not be told that you are responding with their names. In this field, please type the FIRST and LAST name of your closest/best friend in your grade: "
 type: text
 required: true
 ---
 label: "Closest 2"
-description: "Please type the FIRST and LAST name of your SECOND closest friend in your high school: "
+description: "Please type the FIRST and LAST name of your SECOND closest friend in your grade: "
 type: text
 required: true
 ---
 label: "Closest 3"
-description: "Pleasae type the FIRST and LAST name of your THIRD closest friend in your high school: "
+description: "Please type the FIRST and LAST name of your THIRD closest friend in your grade: "
 type: text
 required: true
 ---
