@@ -45,8 +45,8 @@ class DB:
 
     def get_graph_and_gen_time_for_school(self, school_name) -> Tuple[any, float]:
         return (
-            self.get(document=school_name, key="graph"),
-            self.get(document=school_name, key="gen_time"),
+            self.get(document=school_name, key="graph", default=None),
+            self.get(document=school_name, key="gen_time", default=None),
         )
 
     def set_graph_for_school(self, school_name, graph):
