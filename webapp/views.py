@@ -107,7 +107,7 @@ def create_graph_if_not_cached(school_name, force=False):
         db = get_db()
     graph, gen_time = db.get_graph_and_gen_time_for_school(school_name)
     if (
-        force or gen_time is None or graph is None or (time.time() - gen_time > 60 * 60)
+        force or gen_time is None or graph is None
     ):  # If graph isn't cached or was generated over an hour ago
         print("Regenerating")
         data = get_sheet_data(school_name)
