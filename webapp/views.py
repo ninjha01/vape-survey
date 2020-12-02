@@ -5,7 +5,15 @@ import hashlib
 import os
 import plotly
 
-from flask import render_template, Blueprint, request, redirect, flash, current_app
+from flask import (
+    render_template,
+    Blueprint,
+    request,
+    redirect,
+    flash,
+    current_app,
+    jsonify,
+)
 
 from .forms import SurveyForm
 from .sheets import write_to_sheet, get_sheet_data, submit_to_survey, get_schools
@@ -15,12 +23,12 @@ from .utils import encrypt_string
 
 
 blueprint = Blueprint("pages", __name__)
+db = None
 
 
 @blueprint.route("/", methods=["GET", "POST"])
 def home():
     form = SurveyForm(request.form)
-
     if form.validate_on_submit():
         submit_to_sheet(form.data)
         return redirect("/thankyou")
@@ -78,25 +86,28 @@ def about():
 @blueprint.route("/viz", methods=["GET"])
 def viz():
     schools = get_schools()
-    graphs = get_graphs(schools)
-    graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template(
-        "pages/viz_template.html",
-        graphJSON=graphJSON,
-        ids=[i + 1 for i in range(len(graphs))],
-    )
+    return render_template("pages/viz_template.html", schools=schools)
 
 
-def get_graphs(schools):
-    return [create_graph_if_not_cached(s) for s in schools]
+@blueprint.route("/get_graph", methods=["POST"])
+def get_graph():
+    data = request.get_json(force=True)
+    school, force = data.get("school"), data.get("force")
+    try:
+        return jsonify(
+            {"graph": create_graph_if_not_cached(school, force=force), "success": True}
+        )
+    except Exception as e:
+        return jsonify(e)
 
 
-def create_graph_if_not_cached(school_name):
-    db = get_db()
+def create_graph_if_not_cached(school_name, force=False):
+    global db
+    if not db:
+        db = get_db()
     graph, gen_time = db.get_graph_and_gen_time_for_school(school_name)
-    print(graph is None, gen_time is None)
     if (
-        gen_time is None or graph is None or (time.time() - gen_time > 60 * 60)
+        force or gen_time is None or graph is None or (time.time() - gen_time > 60 * 60)
     ):  # If graph isn't cached or was generated over an hour ago
         print("Regenerating")
         data = get_sheet_data(school_name)

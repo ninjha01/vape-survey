@@ -1,6 +1,23 @@
 {% extends 'layouts/main.html' %}
-{% block title %}Vizualization{% endblock %}
+{% block title %}
+  Vizualization
+{% endblock %}
 {% block content %}
+  <style>
+   .loader {
+     border: 16px solid #f3f3f3; /* Light grey */
+     border-top: 16px solid #3498db; /* Blue */
+     border-radius: 50%;
+     width: 120px;
+     height: 120px;
+     animation: spin 2s linear infinite;
+   }
+
+   @keyframes spin {
+     0% { transform: rotate(0deg); }
+     100% { transform: rotate(360deg); }
+   }
+  </style>
   <!-- D3.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
   <!-- jQuery -->
@@ -12,23 +29,35 @@
     <h1>Viz Page</h1>
   </div>
 
-  <h3> {{ time_to_render }}</h3>
+  <h3>{{ time_to_render }}</h3>
 
-  {% for id in ids %}
-    <h3>School: {{id}}</h3>
-    <div id="graph-{{id}}"></div>
+  {% for s in schools %}
+    <h3>School: {{loop.index}}</h3>
+    <div id="graph-{{loop.index}}" ></div>
+    <div id="loader-{{loop.index}}" class="loader"> </div>
+    <script>
+     function plotGraph(id, school, force) {
+       fetch("{{ url_for("pages.get_graph")}}", {
+	 method: "post",
+	 body: JSON.stringify({school, force})
+       }).then((response) => response.json()).then((data) => {
+	 if (data.success === true) {
+	   Plotly.plot(`graph-${id}`, // the ID of the div, created above
+		       data.graph.data,
+		       data.graph.layout || {});
+	   document.getElementById("loader-{{loop.index}}").remove()
+	 }
+	 else {
+	   alert(data.error)
+	   
+	 }
+       }).catch((error) => {
+	 console.log(error)
+	 alert("There was an internal error")
+       })
+     }
+     plotGraph({{loop.index}}, "{{s}}", true)
+    </script>
   {% endfor %}
 
-  <script type="text/javascript">
-
-   var graphs = {{ graphJSON | safe}};
-   var ids = {{ ids | safe }};
-
-   for(var i in graphs) {
-     Plotly.plot(`graph-${ids[i]}`, // the ID of the div, created above
-                 graphs[i].data,
-                 graphs[i].layout || {});
-   }
-
-  </script>
 {% endblock %}

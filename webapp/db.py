@@ -10,7 +10,11 @@ import json
 class DB:
     def __init__(self):
         cred = credentials.Certificate("./secret.json")
-        self.app = firebase_admin.initialize_app(cred)
+        if not firebase_admin._apps:
+            app = firebase_admin.initialize_app(cred)
+        else:
+            app = firebase_admin.get_app("[DEFAULT]")
+        self.app = app
         self.firestore = firestore.client()
 
     def set(
