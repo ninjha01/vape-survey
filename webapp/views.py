@@ -98,7 +98,7 @@ def get_graph():
             {"graph": create_graph_if_not_cached(school, force=force), "success": True}
         )
     except Exception as e:
-        return jsonify(e)
+        return jsonify({"error": str(e)})
 
 
 def create_graph_if_not_cached(school_name, force=False):

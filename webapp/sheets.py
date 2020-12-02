@@ -98,8 +98,6 @@ def get_sheet_data(tab_name: str) -> Dict[str, List[Dict[str, str]]]:
         print(f"Sheets cache hit for {tab_name}")
         return cache[tab_name]
     else:
-        __import__("pdb").set_trace()
-
         result = (
             sheets_service.values()
             .get(spreadsheetId=SPREADSHEET_ID, range=f"{tab_name}")

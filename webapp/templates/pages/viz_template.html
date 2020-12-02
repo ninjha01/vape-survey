@@ -4,6 +4,9 @@
 {% endblock %}
 {% block content %}
   <style>
+   .modebar{
+     display: none !important;
+   }
    .loader {
      border: 16px solid #f3f3f3; /* Light grey */
      border-top: 16px solid #3498db; /* Blue */
@@ -14,8 +17,12 @@
    }
 
    @keyframes spin {
-     0% { transform: rotate(0deg); }
-     100% { transform: rotate(360deg); }
+     0% {
+       transform: rotate(0deg);
+     }
+     100% {
+       transform: rotate(360deg);
+     }
    }
   </style>
   <!-- D3.js -->
@@ -24,40 +31,55 @@
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <!-- Plotly.js -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script>
+   function plotGraph(id, school, force) {
+     console.log("Hiding", `graph-${id}`)
+     document.getElementById(`graph-${id}-holder`).hidden = true;
+     document.getElementById(`loader-${id}`).hidden = false;
+     fetch("{{ url_for("pages.get_graph")}}", {
+       credentials: "include",
+       method: "post",
+       body: JSON.stringify({school, force})
+     }).then((response) => response.json()).then((data) => {
+       if (data.success === true) {
+	 Plotly.plot(`graph-${id}`, // the ID of the div, created above
+  		     data.graph.data,
+  		     data.graph.layout,
+		     {responsive: true})
+	 document.getElementById(`graph-${id}-holder`).hidden = false;
+	 document.getElementById(`loader-${id}`).hidden = true;
+       }
+       else {
+	 alert(data.error)
+
+       }
+     }).catch((error) => {
+       console.log(error)
+       alert("There was an internal error")
+     })
+   }
+  </script>
 
   <div class="page-header">
     <h1>Viz Page</h1>
   </div>
 
-  <h3>{{ time_to_render }}</h3>
-
-  {% for s in schools %}
-    <h3>School: {{loop.index}}</h3>
-    <div id="graph-{{loop.index}}" ></div>
-    <div id="loader-{{loop.index}}" class="loader"> </div>
-    <script>
-     function plotGraph(id, school, force) {
-       fetch("{{ url_for("pages.get_graph")}}", {
-	 method: "post",
-	 body: JSON.stringify({school, force})
-       }).then((response) => response.json()).then((data) => {
-	 if (data.success === true) {
-	   Plotly.plot(`graph-${id}`, // the ID of the div, created above
-		       data.graph.data,
-		       data.graph.layout || {});
-	   document.getElementById("loader-{{loop.index}}").remove()
-	 }
-	 else {
-	   alert(data.error)
-	   
-	 }
-       }).catch((error) => {
-	 console.log(error)
-	 alert("There was an internal error")
-       })
-     }
-     plotGraph({{loop.index}}, "{{s}}", true)
-    </script>
-  {% endfor %}
-
+  <div class="container">
+    {% for s in schools %}
+      <h3>School: {{loop.index}}</h3>
+      <div width="80%" id="graph-{{loop.index}}-holder">
+	<div id="graph-{{loop.index}}" class="graph"></div>
+      </div>
+      <div id="loader-{{loop.index}}" class="loader"></div>
+      <script>
+       plotGraph({{loop.index}}, "{{s}}", false)
+      </script>
+      <input
+	height="32px"
+		value="Force Regen {{ loop.index }}"
+		type="button"
+		onclick="plotGraph({{loop.index}}, '{{s}}', true)"
+      />
+    {% endfor %}
+  </div>
 {% endblock %}

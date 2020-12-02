@@ -23,7 +23,7 @@ def gen_network(data):
             symbol = "circle"
         G.add_node(
             d["Name"],
-            size=5,
+            size=4,
             symbol=symbol,
             color=color,
             label=f"""
@@ -46,7 +46,7 @@ def gen_network(data):
             if f not in ids:
                 G.add_node(
                     f,
-                    size=5,
+                    size=4,
                     color="white",
                     label=f"""
                     <br>Id: {f[:10]}</br>
@@ -126,8 +126,8 @@ def gen_network(data):
             margin=dict(b=20, l=5, r=5, t=40),
             xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
             yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-            width=1000,
-            height=800,
+            width=300,
+            height=300,
         ),
     )
     return fig.to_plotly_json()
