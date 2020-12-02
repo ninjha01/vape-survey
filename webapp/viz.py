@@ -126,8 +126,6 @@ def gen_network(data):
             margin=dict(b=20, l=5, r=5, t=40),
             xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
             yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-            width=300,
-            height=300,
         ),
     )
     return fig.to_plotly_json()
