@@ -46,6 +46,7 @@
   		     data.graph.data,
   		     data.graph.layout,
 		     {responsive: true})
+         window.dispatchEvent(new Event('resize'));
 	 document.getElementById(`graph-${id}-holder`).hidden = false;
 	 document.getElementById(`loader-${id}`).hidden = true;
        }
