@@ -16,7 +16,7 @@ type: email
 required: false
 ---
 label: "Age"
-description: "How old are you?"
+description: "You must be 18 years old or older to participate. How old are you?"
 type: integer
 required: true
 ---
@@ -37,7 +37,7 @@ choices:
  - "Prefer to self-describe"
 ---
 label: "Closest 1"
-description: "The following three questions ask you to list your three closest friends in order of decreasing friendship strength (i.e., from closest to least close). It is important to answer questions 7-9 in the correct order. Please only list your closest friends who are also seniors in the same high school. Your friends will remain anonymous, assigned identifiers, and will not be told that you are responding with their names. In this field, please type the FIRST and LAST name of your closest/best friend in your grade: "
+description: "The following three questions ask you to list your three closest friends in order of decreasing friendship strength (i.e., from closest to least close). Please only list your closest friends who are also seniors in the same high school. Your friends will remain anonymous, assigned identifiers, and will not be told that you are responding with their names. In this field, please type the FIRST and LAST name of your closest/best friend in your grade: "
 type: text
 required: true
 ---
