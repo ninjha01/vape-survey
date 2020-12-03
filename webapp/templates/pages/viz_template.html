@@ -32,32 +32,27 @@
   <!-- Plotly.js -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script>
-   function plotGraph(id, school, force) {
-     console.log("Hiding", `graph-${id}`)
+   async function plotGraph(id, school, force) {
      document.getElementById(`graph-${id}-holder`).hidden = true;
      document.getElementById(`loader-${id}`).hidden = false;
-     fetch("{{ url_for("pages.get_graph")}}", {
-       credentials: "include",
-       method: "post",
-       body: JSON.stringify({school, force})
-     }).then((response) => response.json()).then((data) => {
-       if (data.success === true) {
-	 Plotly.plot(`graph-${id}`, // the ID of the div, created above
-  		     data.graph.data,
-  		     data.graph.layout,
-		     {responsive: true})
-         window.dispatchEvent(new Event('resize'));
-	 document.getElementById(`graph-${id}-holder`).hidden = false;
-	 document.getElementById(`loader-${id}`).hidden = true;
-       }
-       else {
-	 alert(data.error)
-
-       }
-     }).catch((error) => {
-       console.log(error)
-       alert("There was an internal error")
-     })
+     let response = await fetch("{{ url_for("pages.get_graph")}}", {
+	 credentials: "include",
+	 method: "post",
+	 body: JSON.stringify({school, force})
+       })
+     let data = await response.json()
+     if (data.success === true) {
+       Plotly.plot(`graph-${id}`, // the ID of the div, created above
+  		   data.graph.data,
+  		   data.graph.layout,
+		   {responsive: true})
+       window.dispatchEvent(new Event('resize'));
+       document.getElementById(`graph-${id}-holder`).hidden = false;
+       document.getElementById(`loader-${id}`).hidden = true;
+     }
+     else {
+       alert(data.error)
+     }
    }
   </script>
 
@@ -72,16 +67,22 @@
 	<div id="graph-{{loop.index}}" class="graph"></div>
       </div>
       <div id="loader-{{loop.index}}" class="loader"></div>
-      <script>
-       plotGraph({{loop.index}}, "{{s}}", false)
-      </script>
       <input
 	height="32px"
 		value="Force Regen {{ loop.index }}"
 		type="button"
-                hidden=true
 		onclick="plotGraph({{loop.index}}, '{{s}}', true)"
       />
-    {% endfor %}
+      
+    {% endfor %} 
+    <script>
+     let x = async function () {
+       {% for s in schools %}
+       var _ = await plotGraph({{loop.index}}, "{{s}}", false)
+       {% endfor %}
+     }
+     x()
+    </script>
+
   </div>
 {% endblock %}
