@@ -1,3 +1,15 @@
+label: "Age"
+description: "You must be a high school senior who is 18 years old or older to participate. How old are you?"
+type: integer
+required: true
+---
+label: "Grade"
+description: "Please select your grade level:"
+type: select
+required: true
+choices:
+ - "12th grade"
+---
 label: "School"
 description: "Select your school:"
 type: select
@@ -10,23 +22,6 @@ description: "The website will automatically assign an identifier to each name, 
 type: text
 required: true
 ---
-label: "Email"
-description: "A $10.00 Amazon eGift Card will be sent for every 20 students who choose to provide their emails. Your responses will still remain anonymous and will not be linked to your email. This is optional and solely for the purpose of sending gift cards– you may leave this blank."
-type: email
-required: false
----
-label: "Age"
-description: "You must be 18 years old or older to participate. How old are you?"
-type: integer
-required: true
----
-label: "Grade"
-description: "Please select your grade level:"
-type: select
-required: true
-choices:
- - "12th grade"
----
 label: "Gender"
 description: "Please select your gender: "
 type: select
@@ -37,7 +32,7 @@ choices:
  - "Prefer to self-describe"
 ---
 label: "Closest 1"
-description: "The following three questions ask you to list your three closest friends in order of decreasing friendship strength (i.e., from closest to least close). Please only list your closest friends who are also seniors in the same high school. Your friends will remain anonymous, assigned identifiers, and will not be told that you are responding with their names. In this field, please type the FIRST and LAST name of your closest/best friend in your grade: "
+description: "The following three questions ask you to list your three closest friends in order of decreasing friendship strength (i.e., from closest to least close). Please only list your closest friends who are also seniors in your high school. Your friends will remain anonymous, assigned identifiers, and will not be told that you are responding with their names. In this field, please type the FIRST and LAST name of your closest/best friend in your grade: "
 type: text
 required: true
 ---
@@ -66,3 +61,8 @@ required: true
 choices:
   - "True"
   - "False"
+---
+label: "Email"
+description: "A $10.00 Amazon eGift Card will be sent for every 20 students who choose to provide their emails. Your responses will still remain anonymous and will not be linked to your email. This is optional and solely for the purpose of sending gift cards– you may leave this blank."
+type: email
+required: false
