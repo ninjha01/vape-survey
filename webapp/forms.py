@@ -21,7 +21,6 @@ def question_to_field(q: Question):
         validators.append(Regexp(re.compile(q.regexp), message=q.regexp_message))
     if isinstance(q, SelectQuestion):
         choices = [(x, x) for x in q.choices]
-        random.shuffle(choices)
         return SelectField(
             description=q.description,
             label=q.label,
