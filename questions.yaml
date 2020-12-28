@@ -32,17 +32,17 @@ choices:
  - "Prefer to self-describe"
 ---
 label: "Closest 1"
-description: "The following three questions ask you to list your three closest friends in order of decreasing friendship strength (i.e., from closest to least close). Please only list your closest friends who are also seniors in your high school. Your friends will remain anonymous, assigned identifiers, and will not be told that you are responding with their names. In this field, please type the FIRST and LAST name of your closest/best friend in your grade: "
+description: "The following three questions ask you to list your three closest friends in order of decreasing friendship strength (i.e., from closest to least close). Please only list your closest friends who are also 18+ year old seniors in your high school. Your friends will remain anonymous, assigned identifiers, and will not be told that you are responding with their names. In this field, please type the FIRST and LAST name of your 18+ year old closest/best friend in your grade: "
 type: text
 required: true
 ---
 label: "Closest 2"
-description: "Please type the FIRST and LAST name of your SECOND closest friend in your grade: "
+description: "Please type the FIRST and LAST name of your 18+ year old SECOND closest friend in your grade: "
 type: text
 required: true
 ---
 label: "Closest 3"
-description: "Please type the FIRST and LAST name of your THIRD closest friend in your grade: "
+description: "Please type the FIRST and LAST name of your 18+ year old THIRD closest friend in your grade: "
 type: text
 required: true
 ---
@@ -61,6 +61,58 @@ required: true
 choices:
   - "True"
   - "False"
+---
+label: "General Happiness"
+description: "On a scale of 1 (not a very happy person) to 7 (a very happy person), in general, I consider myself:"
+type: select
+required: true
+choices:
+  - "1 (not a very happy person)"
+  - "2"
+  - "3"
+  - "4"
+  - "5"
+  - "6"
+  - "7 (a very happy person)"
+---
+label: "Relative Happiness"
+description: "On a scale of 1 (less happy) to 7 (more happy), compared to most of my peers, I consider myself:"
+type: select
+required: true
+choices:
+  - "1 (less happy)"
+  - "2"
+  - "3"
+  - "4"
+  - "5"
+  - "6"
+  - "7 (more happy)"
+---
+label: "Happy Go Lucky"
+description: "Some people are generally very happy. They enjoy life regardless of what is going on, getting the most out of everything. On a scale of 1 (not at all) to 7 (a great deal), to what extent does this characterization describe you?"
+type: select
+required: true
+choices:
+  - "1 (not at all)"
+  - "2"
+  - "3"
+  - "4"
+  - "5"
+  - "6"
+  - "7 (a great deal)"
+---
+label: "Never Seem As Happy As I Might Be"
+description: "Some people are generally not very happy. Although they are not depressed, they never seem as happy as they might be. On a scale of 1 (not at all) to 7 (a great deal), to what extent does this characterization describe you?"
+type: select
+required: true
+choices:
+  - "1 (not at all)"
+  - "2"
+  - "3"
+  - "4"
+  - "5"
+  - "6"
+  - "7 (a great deal)"
 ---
 label: "Email"
 description: "A $10.00 Amazon eGift Card will be sent for every 20 students who choose to provide their emails. Your responses will still remain anonymous and will not be linked to your email. This is optional and solely for the purpose of sending gift cards– you may leave this blank."
