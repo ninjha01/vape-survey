@@ -26,8 +26,12 @@ blueprint = Blueprint("pages", __name__)
 db = None
 
 
-@blueprint.route("/", methods=["GET", "POST"])
+@blueprint.route("/", methods=["GET"])
 def home():
+    return render_template("pages/consent_template.html")
+
+@blueprint.route("/survey", methods=["GET", "POST"])
+def survey():
     form = SurveyForm(request.form)
     if form.validate_on_submit():
         submit_to_sheet(form.data)
@@ -41,7 +45,6 @@ def home():
                     "error",
                 )
     return render_template("forms/survey.html", form=form)
-
 
 @blueprint.route("/thankyou", methods=["GET"])
 def thankyou():

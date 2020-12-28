@@ -1,0 +1,13 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Consent{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Consent Release</h1>
+  <p> By proceeding to the survey, you understand the information given to you in this form, you accept the
+provisions in the form, and you agree to join the study. You will not give up any legal rights by agreeing
+to the terms of this consent form. </p>
+  <a href="{{ url_for("pages.survey")}}"> I consent </a>
+</div>
+
+{% endblock %}
