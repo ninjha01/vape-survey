@@ -113,8 +113,3 @@ choices:
   - "5"
   - "6"
   - "7 (a great deal)"
----
-label: "Email"
-description: "A $10.00 Amazon eGift Card will be sent for every 20 students who choose to provide their emails. Your responses will still remain anonymous and will not be linked to your email. This is optional and solely for the purpose of sending gift cards– you may leave this blank."
-type: email
-required: false
