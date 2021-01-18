@@ -2,12 +2,10 @@ import re
 import random
 from flask_wtf import Form
 from wtforms import TextField, IntegerField, SelectField
-from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, EqualTo, Length, Regexp, NumberRange
 from .models import (
     Question,
     SelectQuestion,
-    EmailQuestion,
     IntegerQuestion,
     load_from_yaml,
 )
@@ -28,13 +26,6 @@ def question_to_field(q: Question):
             validators=validators,
             render_kw={"class": "form-control"},
         )
-    elif isinstance(q, EmailQuestion):
-        return EmailField(
-            description=q.description,
-            label=q.label,
-            validators=validators,
-            render_kw={"class": "form-control"},
-        )
     elif isinstance(q, IntegerQuestion):
         return IntegerField(
             description=q.description,
@@ -47,7 +38,6 @@ def question_to_field(q: Question):
             ],
             render_kw={"class": "form-control"},
         )
-
     else:  # Basic text question
         return TextField(
             description=q.description,

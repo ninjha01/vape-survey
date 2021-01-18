@@ -117,4 +117,5 @@ def get_schools():
     sheets_service = init_sheets_service()
     result = sheets_service.get(spreadsheetId=SPREADSHEET_ID).execute()
     all_sheets = [x["properties"]["title"] for x in result["sheets"]]
+    # TODO: fix
     return [x for x in all_sheets if "Email" not in x]

@@ -57,7 +57,6 @@ def submit_to_sheet(data):
     for x in [
         "School",
         "Name",
-        "Email",
         "Age",
         "Grade",
         "Gender",
@@ -74,10 +73,6 @@ def submit_to_sheet(data):
     data["Closest 1"] = encrypt_string(data["Closest 1"].strip().lower())
     data["Closest 2"] = encrypt_string(data["Closest 2"].strip().lower())
     data["Closest 3"] = encrypt_string(data["Closest 3"].strip().lower())
-    if "Email" in data:
-        email = data["Email"]
-        write_to_sheet(f"{data['School']} Emails", [email])
-        data["Email"] = encrypt_string(data["Email"].strip().lower())
     submit_to_survey(data)
 
 

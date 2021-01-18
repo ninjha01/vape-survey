@@ -19,10 +19,6 @@ class SelectQuestion(Question):
     choices: List[str]
 
 
-@dataclass
-class EmailQuestion(Question):
-    pass
-
 
 @dataclass
 class IntegerQuestion(Question):
@@ -69,9 +65,6 @@ def load_from_yaml() -> List[Question]:
             elif q["type"] == "integer":
                 del q["type"]  # remove unexpected fields
                 loaded_questions.append(IntegerQuestion(**q))
-            elif q["type"] == "email":
-                del q["type"]  # remove unexpected fields
-                loaded_questions.append(EmailQuestion(**q))
             else:
                 raise ValueError(f"Unknown source definition: {q}")
     return loaded_questions
