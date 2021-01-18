@@ -30,6 +30,7 @@ db = None
 def home():
     return render_template("pages/consent_template.html")
 
+
 @blueprint.route("/survey", methods=["GET", "POST"])
 def survey():
     form = SurveyForm(request.form)
@@ -46,6 +47,7 @@ def survey():
                 )
     return render_template("forms/survey.html", form=form)
 
+
 @blueprint.route("/thankyou", methods=["GET"])
 def thankyou():
     return render_template("pages/thankyou_template.html")
@@ -54,6 +56,7 @@ def thankyou():
 def submit_to_sheet(data):
     del data["csrf_token"]
 
+    # TODO Replace w/ Enum
     for x in [
         "School",
         "Name",
@@ -69,10 +72,14 @@ def submit_to_sheet(data):
         assert x in data
 
     data["School"] = encrypt_string(data["School"].strip().lower())[:10]
-    data["Name"] = encrypt_string(data["Name"].strip().lower())
-    data["Closest 1"] = encrypt_string(data["Closest 1"].strip().lower())
-    data["Closest 2"] = encrypt_string(data["Closest 2"].strip().lower())
-    data["Closest 3"] = encrypt_string(data["Closest 3"].strip().lower())
+
+    def normalize_name(name: str) -> str:
+        return name.replace("-", "").strip().lower()
+
+    data["Name"] = encrypt_string(normalize_name(data["Name"]))
+    data["Closest 1"] = encrypt_string(normalize_name(data["Closest 1"]))
+    data["Closest 2"] = encrypt_string(normalize_name(data["Closest 2"]))
+    data["Closest 3"] = encrypt_string(normalize_name(data["Closest 3"]))
     submit_to_survey(data)
 
 
