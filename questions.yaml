@@ -46,6 +46,26 @@ description: "Please type the FIRST and LAST name of your 18+ year old THIRD clo
 type: text
 required: true
 ---
+label: "Closest 4"
+description: "(Optional) Please type the FIRST and LAST name of your 18+ year old FOURTH closest friend in your grade: "
+type: text
+required: false
+---
+label: "Closest 5"
+description: "(Optional) Please type the FIRST and LAST name of your 18+ year old FIFTH closest friend in your grade: "
+type: text
+required: false
+---
+label: "Closest 6"
+description: "(Optional) Please type the FIRST and LAST name of your 18+ year old SIXTH closest friend in your grade: "
+type: text
+required: false
+---
+label: "Closest 7"
+description: "(Optional) Please type the FIRST and LAST name of your 18+ year old SEVENTH closest friend in your grade: "
+type: text
+required: false
+---
 label: "Influence"
 description: "True/False: I think my friends strongly influence my actions."
 type: select
