@@ -15,7 +15,8 @@ description: "Select your school:"
 type: select
 required: true
 choices:
- - "Example School"
+ - "Hidden Valley High School"
+ - "Salem High School"
 ---
 label: "Name"
 description: "The website will automatically assign an identifier to each name, keeping answers anonymous even to the researchers. Please type your FIRST and LAST name:"
