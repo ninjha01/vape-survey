@@ -4,6 +4,7 @@ import time
 import hashlib
 import os
 import plotly
+from typing import Tuple
 
 from flask import (
     render_template,
@@ -35,8 +36,10 @@ def home():
 def survey():
     form = SurveyForm(request.form)
     if form.validate_on_submit():
-        password = submit_to_sheet_and_gen_password(form.data)
-        return render_template("pages/thankyou_template.html", password=password)
+        identifier, password = submit_to_sheet_and_gen_password(form.data)
+        return render_template(
+            "pages/thankyou_template.html", identifier=identifier, password=password
+        )
     else:
         for field, errors in form.errors.items():
             for error in errors:
@@ -48,7 +51,7 @@ def survey():
     return render_template("forms/survey.html", form=form)
 
 
-def submit_to_sheet_and_gen_password(data):
+def submit_to_sheet_and_gen_password(data) -> Tuple[str, str]:
     del data["csrf_token"]
 
     # TODO Replace w/ Enum
@@ -92,9 +95,9 @@ def submit_to_sheet_and_gen_password(data):
     else:
         data["Closest 7"] = ""
 
-    data["password"] = encrypt_string(data["Name"])[:8]
+    data["password"] = encrypt_string(data["Name"])
     submit_to_survey(data)
-    return data["password"]
+    return data["Name"], data["password"]
 
 
 @blueprint.route("/about", methods=["GET"])
