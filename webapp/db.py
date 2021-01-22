@@ -22,11 +22,14 @@ class DB:
         key,
         value,
         data="data",
-        document="default",
+        document_id="default",
     ):
-        self.firestore.collection(data).document(document).update(
-            {key: json.dumps(value)}
-        )
+        doc = self.firestore.collection("data").document(document_id)
+        if doc.get().exists:
+            doc.update({key: json.dumps(value)})
+        else:
+            print(f"document {document_id} not found, creating...")
+            doc.set({key: json.dumps(value)})
 
     def get(
         self,
@@ -35,13 +38,10 @@ class DB:
         data="data",
         document="default",
     ):
-        result = (
-            self.firestore.collection("data")
-            .document(document)
-            .get()
-            .to_dict()
-            .get(key, default)
-        )
+        document = self.firestore.collection("data").document(document).get().to_dict()
+        if document is None:
+            return None
+        result = document.get(key, default)
         if result is not default:
             return json.loads(result)
         else:
@@ -54,9 +54,9 @@ class DB:
         )
 
     def set_graph_for_school(self, school_name, graph):
-        self.set(document=school_name, key="graph", value=graph)
+        self.set(document_id=school_name, key="graph", value=graph)
         now = time.time()
-        self.set(document=school_name, key="gen_time", value=now)
+        self.set(document_id=school_name, key="gen_time", value=now)
 
 
 db = None

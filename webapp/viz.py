@@ -34,10 +34,15 @@ def gen_network(data):
             """,
         )
         friends = [
-            d.get("Closest 1", None).lower(),
-            d.get("Closest 2", None).lower(),
-            d.get("Closest 3", None).lower(),
+            d.get("Closest 1", None),
+            d.get("Closest 2", None),
+            d.get("Closest 3", None),
+            d.get("Closest 4", None),
+            d.get("Closest 5", None),
+            d.get("Closest 6", None),
+            d.get("Closest 7", None),
         ]
+        friends = [f.lower() for f in friends if f]
         for f in friends:
             skip_list = [encrypt_string(s) for s in ["", "n/a", "N/A"]]
             if f in skip_list:
@@ -58,10 +63,15 @@ def gen_network(data):
     # Add Edges
     for d in data:
         friends = [
-            d.get("Closest 1", None).lower(),
-            d.get("Closest 2", None).lower(),
-            d.get("Closest 3", None).lower(),
+            d.get("Closest 1", None),
+            d.get("Closest 2", None),
+            d.get("Closest 3", None),
+            d.get("Closest 4", None),
+            d.get("Closest 5", None),
+            d.get("Closest 6", None),
+            d.get("Closest 7", None),
         ]
+        friends = [f.lower() for f in friends if f]
         for f in friends:
             if f in ids:
                 G.add_edge(d["Name"], f)
