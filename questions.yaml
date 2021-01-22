@@ -20,7 +20,7 @@ choices:
 ---
 label: "Name"
 description: "The website will automatically assign an identifier to each name, keeping answers anonymous even to the researchers. Please type your FIRST and LAST name:"
-regexp: "[a-zA-Z0-9-]* [a-zA-Z0-9-]*$"
+regexp: "(^[a-zA-Z][a-zA-Z-']+ [a-zA-Z-']+[a-zA-Z]$)"
 regexp_message: "Please enter a first AND last name"
 type: text
 required: true
@@ -36,49 +36,49 @@ choices:
 ---
 label: "Closest 1"
 description: "The following three questions ask you to list your three closest friends in order of decreasing friendship strength (i.e., from closest to least close). Please only list your closest friends who are also 18+ year old seniors in your high school. Your friends will remain anonymous, assigned identifiers, and will not be told that you are responding with their names. In this field, please type the FIRST and LAST name of your 18+ year old closest/best friend in your grade: "
-regexp: "[a-zA-Z0-9-]* [a-zA-Z0-9-]*$"
+regexp: "(^[a-zA-Z][a-zA-Z-']+ [a-zA-Z-']+[a-zA-Z]$)"
 regexp_message: "Please enter a first AND last name"
 type: text
 required: true
 ---
 label: "Closest 2"
 description: "Please type the FIRST and LAST name of your 18+ year old SECOND closest friend in your grade: "
-regexp: "[a-zA-Z0-9-]* [a-zA-Z0-9-]*$"
+regexp: "(^[a-zA-Z][a-zA-Z-']+ [a-zA-Z-']+[a-zA-Z]$)"
 regexp_message: "Please enter a first AND last name"
 type: text
 required: true
 ---
 label: "Closest 3"
 description: "Please type the FIRST and LAST name of your 18+ year old THIRD closest friend in your grade: "
-regexp: "[a-zA-Z0-9-]* [a-zA-Z0-9-]*$"
+regexp: "(^[a-zA-Z][a-zA-Z-']+ [a-zA-Z-']+[a-zA-Z]$)"
 regexp_message: "Please enter a first AND last name"
 type: text
 required: true
 ---
 label: "Closest 4"
 description: "(Optional) Please type the FIRST and LAST name of your 18+ year old FOURTH closest friend in your grade: "
-regexp: "[a-zA-Z0-9-]* [a-zA-Z0-9-]*$"
+regexp: "^$|(^[a-zA-Z][a-zA-Z-']+ [a-zA-Z-']+[a-zA-Z]$)"
 regexp_message: "Please enter a first AND last name"
 type: text
 required: false
 ---
 label: "Closest 5"
 description: "(Optional) Please type the FIRST and LAST name of your 18+ year old FIFTH closest friend in your grade: "
-regexp: "[a-zA-Z0-9-]* [a-zA-Z0-9-]*$"
+regexp: "^$|(^[a-zA-Z][a-zA-Z-']+ [a-zA-Z-']+[a-zA-Z]$)"
 regexp_message: "Please enter a first AND last name"
 type: text
 required: false
 ---
 label: "Closest 6"
 description: "(Optional) Please type the FIRST and LAST name of your 18+ year old SIXTH closest friend in your grade: "
-regexp: "[a-zA-Z0-9-]* [a-zA-Z0-9-]*$"
+regexp: "^$|(^[a-zA-Z][a-zA-Z-']+ [a-zA-Z-']+[a-zA-Z]$)"
 regexp_message: "Please enter a first AND last name"
 type: text
 required: false
 ---
 label: "Closest 7"
 description: "(Optional) Please type the FIRST and LAST name of your 18+ year old SEVENTH closest friend in your grade: "
-regexp: "[a-zA-Z0-9-]* [a-zA-Z0-9-]*$"
+regexp: "^$|(^[a-zA-Z][a-zA-Z-']+ [a-zA-Z-']+[a-zA-Z]$)"
 regexp_message: "Please enter a first AND last name"
 type: text
 required: false
