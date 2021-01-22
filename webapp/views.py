@@ -80,6 +80,22 @@ def submit_to_sheet(data):
     data["Closest 1"] = encrypt_string(normalize_name(data["Closest 1"]))
     data["Closest 2"] = encrypt_string(normalize_name(data["Closest 2"]))
     data["Closest 3"] = encrypt_string(normalize_name(data["Closest 3"]))
+    if data.get("Closest 4", "") != "":
+        data["Closest 4"] = encrypt_string(normalize_name(data["Closest 4"]))
+    else:
+        data["Closest 4"] = ""
+    if data.get("Closest 5", "") != "":
+        data["Closest 5"] = encrypt_string(normalize_name(data["Closest 5"]))
+    else:
+        data["Closest 5"] = ""
+    if data.get("Closest 6", "") != "":
+        data["Closest 6"] = encrypt_string(normalize_name(data["Closest 6"]))
+    else:
+        data["Closest 6"] = ""
+    if data.get("Closest 7", "") != "":
+        data["Closest 7"] = encrypt_string(normalize_name(data["Closest 7"]))
+    else:
+        data["Closest 7"] = ""
     submit_to_survey(data)
 
 
