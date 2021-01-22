@@ -35,8 +35,8 @@ def home():
 def survey():
     form = SurveyForm(request.form)
     if form.validate_on_submit():
-        submit_to_sheet(form.data)
-        return redirect("/thankyou")
+        password = submit_to_sheet_and_gen_password(form.data)
+        return render_template("pages/thankyou_template.html", password=password)
     else:
         for field, errors in form.errors.items():
             for error in errors:
@@ -48,12 +48,7 @@ def survey():
     return render_template("forms/survey.html", form=form)
 
 
-@blueprint.route("/thankyou", methods=["GET"])
-def thankyou():
-    return render_template("pages/thankyou_template.html")
-
-
-def submit_to_sheet(data):
+def submit_to_sheet_and_gen_password(data):
     del data["csrf_token"]
 
     # TODO Replace w/ Enum
@@ -96,7 +91,10 @@ def submit_to_sheet(data):
         data["Closest 7"] = encrypt_string(normalize_name(data["Closest 7"]))
     else:
         data["Closest 7"] = ""
+
+    data["password"] = encrypt_string(data["Name"])[:8]
     submit_to_survey(data)
+    return data["password"]
 
 
 @blueprint.route("/about", methods=["GET"])

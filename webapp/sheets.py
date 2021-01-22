@@ -15,7 +15,9 @@ question_file = "./questions.yaml"
 assert os.path.exists(question_file), question_file
 with open(question_file, "r") as question_def_file:
     question_def_dicts = yaml.safe_load_all(question_def_file)
-    HEADERS = [d["label"] for d in question_def_dicts]
+    HEADERS = [d["label"] for d in question_def_dicts] + [
+        "password"
+    ]  # password is stored in sheet, but not a question in survey
 
 sheets_service = None
 
