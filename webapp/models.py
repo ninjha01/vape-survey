@@ -46,12 +46,11 @@ def load_from_yaml() -> List[Question]:
                         f"Question {i} in {question_file} must define a regexp error message"
                     )
                 try:
-                    compiled = re.compile(q["regexp"])
+                    re.compile(q["regexp"])
                 except re.error:
                     raise ValueError(
                         f"Error compiling regexp {q['regexp']} for question {i} in {question_file}"
                     )
-                q["regexp"] = str(compiled)
             else:
                 q["regexp"] = None
                 q["regexp_message"] = None

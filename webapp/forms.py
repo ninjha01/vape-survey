@@ -16,7 +16,7 @@ def question_to_field(q: Question):
     if q.required:
         validators.append(DataRequired())
     if q.regexp:
-        validators.append(Regexp(re.compile(q.regexp), message=q.regexp_message))
+        validators.append(Regexp(q.regexp, message=q.regexp_message))
     if isinstance(q, SelectQuestion):
         choices = [(x, x) for x in q.choices]
         return SelectField(
