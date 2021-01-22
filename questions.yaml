@@ -15,7 +15,6 @@ description: "Select your school:"
 type: select
 required: true
 choices:
- - "Hidden Valley High School"
  - "Salem High School"
 ---
 label: "Name"
