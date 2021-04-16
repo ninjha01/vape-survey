@@ -27,7 +27,6 @@ def gen_network(data):
             symbol=symbol,
             color=color,
             label=f"""
-            <br>Id: {d["Name"][:10]}</br>
             <br>Influence: {d["Influence"]}</br>
             <br>Gender: {d["Gender"]}</br>
             <extra></extra>
@@ -54,7 +53,6 @@ def gen_network(data):
                     size=4,
                     color="white",
                     label=f"""
-                    <br>Id: {f[:10]}</br>
                     <extra></extra>
                     """,
                     symbol="circle",
