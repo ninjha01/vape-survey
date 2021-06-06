@@ -19,7 +19,6 @@ class SelectQuestion(Question):
     choices: List[str]
 
 
-
 @dataclass
 class IntegerQuestion(Question):
     pass
@@ -67,3 +66,17 @@ def load_from_yaml() -> List[Question]:
             else:
                 raise ValueError(f"Unknown source definition: {q}")
     return loaded_questions
+
+
+def load_winners_from_yaml() -> List[str]:
+    winners_file = "./winners.yaml"
+    if not os.path.exists(winners_file):
+        print(
+            f"Couldn't find {winners_file}, did you download it from the secret bucket? gsutil cp gs://vape-survey-secrets/winners.yaml winners.yaml"
+        )
+        return {}
+    with open(winners_file, "r") as winners_def_file:
+        return {
+            x["identifier"]: {"password": x["password"], "code": x["code"]}
+            for x in list(yaml.safe_load_all(winners_def_file))
+        }

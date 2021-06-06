@@ -16,7 +16,7 @@ from flask import (
     jsonify,
 )
 
-from .forms import SurveyForm
+from .forms import SurveyForm, WinnerForm, get_code_for_winner
 from .sheets import write_to_sheet, get_sheet_data, submit_to_survey, get_schools
 from .db import get_db
 from .viz import gen_network
@@ -49,6 +49,34 @@ def survey():
                     "error",
                 )
     return render_template("forms/survey.html", form=form)
+
+
+@blueprint.route("/winners", methods=["GET", "POST"])
+def winners():
+    form = WinnerForm(request.form)
+    if form.validate_on_submit():
+        identifier, password = (
+            form.data.get("identifier_select"),
+            form.data.get("password_field"),
+        )
+        code = get_code_for_winner(identifier, password)
+        if code:
+            return render_template(
+                "pages/won_giftcard_template.html", code=code
+            )
+        else:
+            return render_template(
+                "pages/incorrect_password_template.html", identifier=identifier
+            )
+    else:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(
+                    "Error in the %s field - %s"
+                    % (getattr(form, field).label.text, error),
+                    "error",
+                )
+    return render_template("forms/winners.html", form=form)
 
 
 def submit_to_sheet_and_gen_password(data) -> Tuple[str, str]:

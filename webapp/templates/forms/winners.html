@@ -1,0 +1,32 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Winners{% endblock %}
+{% block content %}
+  <form method="post" class="form" action="/winners">
+    <h2 class="form-heading">
+      Vape Survey Winners
+    </h2>
+    {{ form.hidden_tag() }}
+    
+    <p>
+      By completing this survey, you are consenting to be in this research study. Your participation is voluntary, and you can stop at any time.
+    </p>
+    
+    <h3>{{ form.identifier_select.label }}</h3>
+    <p>{{form.identifier_select.description}}</p>
+    {{ form.identifier_select() }}
+    <br/>
+
+    <h3>{{ form.password_field.label }}</h3>
+    <p>{{form.password_field.description}}</p>
+    {{ form.password_field() }}
+
+    <br/>
+    
+    <input
+      type="submit"
+      value="Submit"
+      class="btn btn-primary btn-lg btn-block"
+    />
+    <br />
+  </form>
+{% endblock %}

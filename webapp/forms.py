@@ -8,6 +8,7 @@ from .models import (
     SelectQuestion,
     IntegerQuestion,
     load_from_yaml,
+    load_winners_from_yaml,
 )
 
 
@@ -56,3 +57,29 @@ class SurveyForm(Form):
 
 for q in questions:
     setattr(SurveyForm, q.label, question_to_field(q))
+
+
+def get_code_for_winner(identifier, password):
+    winning_identifiers = load_winners_from_yaml()
+    if identifier not in winning_identifiers:
+        return None
+    if password != winning_identifiers[identifier]["password"]:
+        return None
+    return winning_identifiers[identifier]["code"]
+
+
+class WinnerForm(Form):
+    winning_identifiers = load_winners_from_yaml()
+    identifier_select = SelectField(
+        description="Winning Identifiers",
+        label="Winning Identifiers",
+        choices=[("", "")] + [(k, k) for k in winning_identifiers.keys()],
+        validators=[DataRequired()],
+        render_kw={"class": "form-control"},
+    )
+    password_field = TextField(
+        description="Enter the password you were given when you submitted the survey",
+        label="Password",
+        validators=[DataRequired()],
+        render_kw={"class": "form-control"},
+    )
